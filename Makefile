@@ -6,6 +6,11 @@ CPPFLAGS=$(INCFLAGS) $(DEPFLAGS) $(WARNFLAGS) $(EXTRAFLAGS)
 CXXFLAGS=-std=c++0x
 SRC=$(wildcard *.cpp)
 
+# Clang rules
+EXTRAFLAGS= #-fno-deduce-init-list
+LDFLAGS+=-stdlib=libc++
+CXXFLAGS+=-stdlib=libc++
+
 .PHONY : all
 all : build test
 
@@ -29,7 +34,7 @@ clean-test :
 build : pd
 
 pd : $(SRC:%.cpp=%.o)
-	$(CXX) -o $@ $^
+	$(CXX) -o $@ $(LDFLAGS) $^
 
 TESTS=$(basename $(notdir $(wildcard test/*.pd)))
 define TESTRULE
