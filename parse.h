@@ -5,7 +5,7 @@
 #include <iosfwd>
 #include <vector>
 
-class Interpreter;
+struct Interpreter;
 
 void parse(std::istream&, Interpreter&);
 
